@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 5000;
 connectDatabase();
 
 const server = app.listen(PORT, () => {
-    console.log(`Server Running on http://be-service:${PORT}`);
+    console.log(`Server Running on http://be:${PORT}`);
 });
 
 
@@ -14,7 +14,7 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server, {
     // pingTimeout: 60000,
     cors: {
-        origin: "http://fe-service:3000",
+        origin: "http://fe:3000",
     }
 });
 
