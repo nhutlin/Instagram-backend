@@ -44,8 +44,6 @@ pipeline {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
             dockerImage.push("latest")
           }
-
-          sh 'cd /var/jenkins_home/workspace/BE-Instagram-CICD && docker-compose up -d'
         }
 
       }
@@ -60,12 +58,12 @@ pipeline {
     // }
   }
   
-//   post {
-//         always {
-//             // Clean up docker images
-//             cleanWs()
-//             sh "docker image prune -f"
-//         }
-//     }
+  post {
+        always {
+            // Clean up docker images
+            cleanWs()
+            sh "docker image prune -f"
+        }
+    }
 
 }
