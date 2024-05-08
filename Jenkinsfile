@@ -45,7 +45,7 @@ pipeline {
             dockerImage.push("latest")
           }
 
-          sh 'cd /var/jenkins_home/workspace/BE-Instagram-CICD && docker compose up -d'
+          sh 'cd /var/jenkins_home/workspace/BE-Instagram-CICD && docker-compose up -d'
         }
 
       }
