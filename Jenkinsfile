@@ -65,7 +65,6 @@ pipeline {
               sh 'minikube start'
               sh 'kubectl apply -f /var/lib/jenkins/workspace/BE-Instagram-CICD/deployment.yml'
               sh 'kubectl get all'
-              sh 'minikube service fe'
             } 
           }
         }
