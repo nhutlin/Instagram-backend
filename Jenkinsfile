@@ -22,7 +22,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm version'
-        sh 'cd /var/jenkins_home/workspace/BE-Instagram-CICD && npm install'
+        sh 'cd /var/lib/jenkins/workspace/BE-Instagram-CICD && npm install'
         echo 'Install npm successfully...'
       }
     }
@@ -56,6 +56,18 @@ pipeline {
     //     }
     //   }
     // }
+
+    stage('Deploy to K8s'){
+      steps{
+        script{
+          dir('Kubernetes') {
+            withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'minikubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443/') {
+              sh 'kubectl apply -f /var/lib/jenkins/workspace/BE-Instagram-CICD/deployment.yml'
+            } 
+          }
+        }
+      }
+    }
   }
   
   post {
