@@ -22,7 +22,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm version'
-        sh 'cd /var/lib/jenkins/workspace/BE-Instagram-CICD && npm install'
+        sh 'cd /var/lib/jenkins/workspace/Github-BE-Instagram && npm install'
         echo 'Install npm successfully...'
       }
     }
@@ -61,8 +61,8 @@ pipeline {
       steps{
         script{
           dir('Kubernetes') {
-            withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: 'kubernetes-admin@kubernetes', credentialsId: 'kubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://10.0.0.212:6443/') {
-              sh 'kubectl apply -f /var/lib/jenkins/workspace/BE-Instagram-CICD/deployment.yml'
+            withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: 'kubernetes-admin@kubernetes', credentialsId: 'kubeconfig', namespace: 'default', restrictKubeConfigAccess: false) {
+              sh 'kubectl apply -f /var/lib/jenkins/workspace/Github-BE-Instagram/deployment.yml'
               sh 'kubectl get all'
             } 
           }
