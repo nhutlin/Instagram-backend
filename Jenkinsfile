@@ -19,14 +19,6 @@ pipeline {
       }
     }
 
-    stage('Build') {
-      steps {
-        sh 'npm version'
-        sh 'cd /var/lib/jenkins/workspace/Github-BE-Instagram && npm install'
-        echo 'Install npm successfully...'
-      }
-    }
-
     stage('Build image') {
       steps{
         script {
